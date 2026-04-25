@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm Sorry</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e8617a;
+    --blush: #f7c5ce;
+    --deep: #2a0a12;
+    --cream: #fdf6f0;
+    --gold: #c9956e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--deep);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Petal rain */
+  .petals {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .petal {
+    position: absolute;
+    top: -60px;
+    width: 14px;
+    height: 20px;
+    background: radial-gradient(ellipse at 40% 30%, #f9d5db, #e8617a88);
+    border-radius: 60% 40% 60% 40%;
+    opacity: 0;
+    animation: fall linear infinite;
+    filter: blur(0.5px);
+  }
+
+  @keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+    5%   { opacity: 0.85; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(60px); opacity: 0; }
+  }
+
+  /* Card */
+  .card {
+    position: relative;
+    z-index: 10;
+    background: var(--cream);
+    border-radius: 4px;
+    max-width: 480px;
+    width: 92%;
+    padding: 56px 48px 48px;
+    box-shadow: 0 30px 90px #00000088, 0 0 0 1px #e8617a22;
+    animation: rise 1.2s cubic-bezier(0.16,1,0.3,1) both;
+    text-align: center;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(40px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Decorative top line */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 48px; right: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  }
+
+  .heart-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 20px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.12); }
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--deep);
+    line-height: 1.15;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+
+  h1 em {
+    color: var(--rose);
+    font-style: italic;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+  }
+
+  .divider span {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e8617a55);
+  }
+
+  .divider span:last-child {
+    background: linear-gradient(90deg, #e8617a55, transparent);
+  }
+
+  .divider .dot {
+    flex: none;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--rose);
+    opacity: 0.5;
+  }
+
+  .message {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 1.05rem;
+    color: #5a3040;
+    line-height: 1.85;
+    text-align: left;
+    animation: fadein 1.8s ease both;
+  }
+
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .message p + p { margin-top: 1em; }
+
+  .message .highlight {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--rose);
+    font-size: 1.15rem;
+  }
+
+  .promise {
+    margin-top: 32px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, #fdeaee, #fdf0f4);
+    border-left: 3px solid var(--rose);
+    border-radius: 2px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--deep);
+    line-height: 1.7;
+  }
+
+  .signature {
+    margin-top: 36px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  /* Button */
+  .btn {
+    margin-top: 36px;
+    display: inline-block;
+    padding: 14px 40px;
+    background: var(--rose);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn:hover { background: #d44d67; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  /* Reply panel */
+  .reply {
+    display: none;
+    margin-top: 24px;
+    animation: fadein 0.7s ease both;
+  }
+
+  .reply.show { display: block; }
+
+  .reply p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--rose);
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- Petal rain -->
+<div class="petals" id="petals"></div>
+
+<div class="card">
+  <span class="heart-icon">🌹</span>
+
+  <h1>I'm truly <em>sorry</em></h1>
+
+  <div class="divider">
+    <span></span><div class="dot"></div><span></span>
+  </div>
+
+  <div class="message">
+    <p>Hey… I know I messed up. And I know a simple "sorry" might not feel like enough right now — but I mean it with everything I have.</p>
+
+    <p>What I did was wrong. I wasn't being the friend you deserve, and I hurt you when I should have been there for you. That's on me, completely.</p>
+
+    <p class="highlight">"I never wanted to make you feel like that. Never."</p>
+
+    <p>You matter so much to me. Your smile, your heart, the way you see the world — I don't want to lose any of that over my stupid mistake.</p>
+  </div>
+
+  <div class="promise">
+    I promise you — with everything I am — I won't do it again. You have my word, and you have my whole heart behind it. 🤍
+  </div>
+
+  <div class="signature">— Your friend, always 🌸</div>
+
+  <br>
+  <button class="btn" onclick="forgive()">Forgive Him 💕</button>
+
+  <div class="reply" id="reply">
+    <p>Thank you… 🥺<br>This means the whole world to me. I promise I'll always be worth it. 🌹</p>
+  </div>
+</div>
+
+<script>
+  // Generate petals
+  const container = document.getElementById('petals');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (7 + Math.random() * 8) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.transform = `rotate(${Math.random()*360}deg) scale(${0.6 + Math.random()*0.8})`;
+    container.appendChild(p);
+  }
+
+  function forgive() {
+    document.querySelector('.btn').style.display = 'none';
+    document.getElementById('reply').classList.add('show');
+    // burst a few extra petals
+    for (let i = 0; i < 15; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = (4 + Math.random() * 4) + 's';
+      p.style.animationDelay = (Math.random() * 2) + 's';
+      p.style.transform = `scale(${1 + Math.random()})`;
+      container.appendChild(p);
+    }
+  }
+</script>
+</body>
+</html>
