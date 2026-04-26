@@ -6,10 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Rosita!!!</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #ffe6e6;
             font-family: 'Arial', sans-serif;
             text-align: center;
+            background-color: #ffe6e6;
+        }
+
+        #countdown-screen {
+            position: fixed;
+            inset: 0;
+            background: #ff4d4d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+
+        #number {
+            font-size: 180px;
+            font-weight: bold;
+            color: white;
+        }
+
+        #main-page {
+            display: none;
+            background-image: url(bg.webp);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
             padding: 50px;
         }
 
@@ -22,14 +53,70 @@
         h2 {
             color: #ff9999;
             font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        img {
+            max-width: 300px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 14px 36px;
+            font-size: 18px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e03333;
         }
     </style>
 </head>
 
 <body>
-    <h1>For My Rosita!!!</h1>
-    <h2>I Like You more than the words can say</h2>
-    <img src="download (1).jpg" alt="Love GIF">
+
+    <div id="countdown-screen">
+        <h1 id="number">3</h1>
+    </div>
+
+    <div id="main-page">
+        <h1>For My Rosita!!!</h1>
+        <h2>I Like You more than the words can say</h2>
+        <img src="download (1).jpg" alt="Friends Forever">
+        <button onclick="showLove()">Click Me!</button>
+    </div>
+
+    <script>
+        let count = 3;
+        const numEl = document.getElementById('number');
+        const countdownScreen = document.getElementById('countdown-screen');
+        const mainPage = document.getElementById('main-page');
+
+        function tick() {
+            if (count === 0) {
+                countdownScreen.style.display = 'none';
+                mainPage.style.display = 'block';
+                return;
+            }
+            numEl.textContent = count;
+            count--;
+            setTimeout(tick, 1000);
+        }
+
+        tick();
+
+        function showLove() {
+            alert("I Like You So Much!!!");
+        }
+    </script>
+
 </body>
 
 </html>
