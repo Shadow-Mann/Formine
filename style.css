@@ -632,6 +632,64 @@ main { position: relative; z-index: 2; }
   border: 2px dashed rgba(43,26,102,.45);
   border-radius: 20px;
   padding: 1rem 1.2rem;
+  margin-top: 1rem;
+}
+
+.gift-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.video-card {
+  width: min(100%, 34rem);
+  margin-top: 1.5rem;
+  background: #ffffff;
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  padding: 1.1rem;
+  box-shadow: 0 12px 0 rgba(43, 26, 102, .14), 0 20px 40px rgba(43, 26, 102, .12);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  align-items: center;
+  animation: pop .6s cubic-bezier(.2, 1.4, .4, 1);
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  background: #1a1038;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.video-actions {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-video {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: 0.85rem 1.8rem;
+  background: linear-gradient(135deg, var(--purple), #9855f0);
+  color: #ffffff;
 }
 
 .foot {
@@ -665,7 +723,8 @@ main { position: relative; z-index: 2; }
 .reveal .cards,
 .reveal .polaroid,
 .reveal .gift,
-.reveal .gift-note {
+.reveal .gift-note,
+.reveal .video-card {
   opacity: 0;
   transform: translateY(28px) scale(.985);
   transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
@@ -674,7 +733,8 @@ main { position: relative; z-index: 2; }
 .reveal.seen .cards,
 .reveal.seen .polaroid,
 .reveal.seen .gift,
-.reveal.seen .gift-note.show {
+.reveal.seen .gift-note.show,
+.reveal.seen .video-card:not([hidden]) {
   opacity: 1;
   transform: none;
 }

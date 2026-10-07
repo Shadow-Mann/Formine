@@ -20,6 +20,7 @@
   </div>
 
   <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="float-layer" id="float-layer" aria-hidden="true"></div>
 
   <button id="tune" class="tune" type="button" aria-pressed="false">Play a tune ♫</button>
 
@@ -83,7 +84,19 @@
         <span class="gift-box"></span>
         <span class="gift-label">Open it</span>
       </button>
-      <p class="gift-note" id="gift-note" aria-live="polite"></p>
+      <div class="gift-container" id="gift-container">
+        <p class="gift-note" id="gift-note" aria-live="polite"></p>
+        <div class="video-card" id="video-card" hidden>
+          <div class="video-wrapper">
+            <iframe id="video-frame" src="" title="Birthday Gift Video" allow="autoplay; fullscreen" allowfullscreen></iframe>
+          </div>
+          <div class="video-actions">
+            <a href="https://drive.google.com/file/d/1UjnPYfv5KL8cjs1rrig2ptfaoLPbMRCm/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-video">
+              <span>Open & Watch Video 🎬</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer class="foot" id="foot" hidden>
