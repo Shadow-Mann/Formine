@@ -1,122 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Rosita!!!</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            background-color: #ffe6e6;
-        }
-
-        #countdown-screen {
-            position: fixed;
-            inset: 0;
-            background: #ff4d4d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
-
-        #number {
-            font-size: 180px;
-            font-weight: bold;
-            color: white;
-        }
-
-        #main-page {
-            display: none;
-            background-image: url(bg.webp);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-            padding: 50px;
-        }
-
-        h1 {
-            color: #ff4d4d;
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            color: #ff9999;
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-
-        img {
-            max-width: 300px;
-            border-radius: 16px;
-            margin-bottom: 24px;
-        }
-
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 14px 36px;
-            font-size: 18px;
-            background: #ff4d4d;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #e03333;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy birthday Rosita</title>
+  <meta name="theme-color" content="#7a3fe0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+<body class="locked">
 
-<body>
+  <!-- 3, 2, 1 -->
+  <div id="countdown" role="status" aria-live="polite">
+    <p class="cd-small">Hold on, something is coming for Rosita</p>
+    <div id="cd-number">3</div>
+    <p class="cd-skip">tap anywhere to skip</p>
+  </div>
 
-    <div id="countdown-screen">
-        <h1 id="number">3</h1>
-    </div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
 
-    <div id="main-page">
-        <h1>For My Rosita!!!</h1>
-        <h2>I Like You more than the words can say</h2>
-        <img src="download (1).jpg" alt="Friends Forever">
-        <button onclick="showLove()">Click Me!</button>
-    </div>
+  <button id="tune" class="tune" type="button" aria-pressed="false">Play a tune</button>
 
-    <script>
-        let count = 3;
-        const numEl = document.getElementById('number');
-        const countdownScreen = document.getElementById('countdown-screen');
-        const mainPage = document.getElementById('main-page');
+  <main>
 
-        function tick() {
-            if (count === 0) {
-                countdownScreen.style.display = 'none';
-                mainPage.style.display = 'block';
-                return;
-            }
-            numEl.textContent = count;
-            count--;
-            setTimeout(tick, 1000);
-        }
+    <!-- Cake -->
+    <section class="scene hero" id="hero">
+      <div class="hero-text" aria-live="polite">
+        <h1 id="hero-title">Make a wish, Rosita</h1>
+        <p id="hero-sub">Think of something good, then blow out the candles.</p>
+      </div>
 
-        tick();
+      <div class="cake lit" id="cake" aria-hidden="true">
+        <div class="glow"></div>
+        <div class="candles">
+          <div class="candle"><span class="flame"></span></div>
+          <div class="candle"><span class="flame"></span></div>
+          <div class="candle"><span class="flame"></span></div>
+        </div>
+        <div class="tier tier-top"></div>
+        <div class="tier tier-mid"></div>
+        <div class="tier tier-bottom"></div>
+        <div class="plate"></div>
+      </div>
 
-        function showLove() {
-            alert("I Like You So Much!!!");
-        }
-    </script>
+      <div class="hero-actions">
+        <button id="blow" class="btn" type="button">Blow the candles</button>
+        <button id="relight" class="btn-text" type="button" hidden>Light them again</button>
+      </div>
+    </section>
 
+    <!-- Letter -->
+    <section class="scene reveal" id="letter-section" hidden>
+      <h2>A little letter for you</h2>
+      <article class="paper">
+        <div class="paper-text" id="letter"></div>
+      </article>
+    </section>
+
+    <!-- Reasons -->
+    <section class="scene reveal" id="reasons-section" hidden>
+      <h2>Why you are my person</h2>
+      <p class="hint">Tap a card to flip it</p>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <!-- Photo -->
+    <section class="scene reveal" id="photo-section" hidden>
+      <h2>Us, forever</h2>
+      <figure class="polaroid">
+        <img id="photo" src="friends.jpg" alt="Two cartoon cats waving at each other with the words friends forever">
+        <figcaption id="photo-caption"></figcaption>
+      </figure>
+    </section>
+
+    <!-- Gift -->
+    <section class="scene reveal" id="gift-section" hidden>
+      <h2>One more thing</h2>
+      <button class="gift" id="gift" type="button" aria-expanded="false" aria-controls="gift-note">
+        <span class="gift-lid"></span>
+        <span class="gift-box"></span>
+        <span class="gift-label">Open it</span>
+      </button>
+      <p class="gift-note" id="gift-note" aria-live="polite"></p>
+    </section>
+
+    <footer class="foot" id="foot" hidden>
+      <p>Made with love, for Rosita</p>
+    </footer>
+
+  </main>
+
+  <script src="script.js"></script>
 </body>
-
 </html>
